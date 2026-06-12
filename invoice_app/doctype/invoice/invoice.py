@@ -45,3 +45,10 @@ class Invoice(Document):
     if not self.outstanding_amount:
       self.outstanding_amount = self.grand_total
   
+  def update_payment_status(self):
+    if self.outstanding_amount <= 0:
+      self.payment_status = "paid"
+    elif self.outstanding_amount < self.grand_total:
+      self.payment_status = "Partially Paid"
+    else:
+      self.payment_status = "Unpaid"
