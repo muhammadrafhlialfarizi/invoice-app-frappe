@@ -21,3 +21,19 @@ class Invoice(Document):
     """Ambil huruf pertama setiap kata, contoh: Muat Logistik Indonesia → MLI"""
     words = name.strip().split()
     return "".join(word[0].upper() for word in words if word)
+  
+  def before_save(self):
+    """Hitung semua field otomatis sebelum disimpan"""
+    self.calculate_item_totals()
+    self.calculate_grand_total()
+    self.update_payment_status()
+    
+  def calculate_item_totals(self):
+    """Hitung amount tiap item dan total keseluruhan"""
+    total = 0
+    for item in self.item:
+      item.amount = item.qty * item.rate
+      total += item.amount
+    self.total_amount = total
+  
+  
