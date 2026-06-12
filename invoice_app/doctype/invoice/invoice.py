@@ -36,4 +36,12 @@ class Invoice(Document):
       total += item.amount
     self.total_amount = total
   
+  def calculate_grand_total(self):
+    """Hitung grand total termasuk pajak"""
+    tax_amount = self.total_amount * (self.tax_percentage or 0) / 100
+    self.grand_total = self.total_amount + tax_amount
+    
+    # Inisialisasi outstanding amount jika invoice baru
+    if not self.outstanding_amount:
+      self.outstanding_amount = self.grand_total
   
