@@ -46,7 +46,7 @@ class Invoice(Document):
       self.outstanding_amount = self.grand_total
   
   def update_payment_status(self):
-    if self.outstanding_amount <= 0: # Kondisi 1: Lunas
+    if self.outstanding_amount <= 0 or self.outstanding_amount <= 0 or self.outstanding_amount == self.payment_amount: # Kondisi 1: Lunas
       self.payment_status = "Paid"
     elif self.outstanding_amount < self.grand_total: # Kondisi 2: Bayar sebagian
       self.payment_status = "Partially Paid"
