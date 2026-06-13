@@ -9,7 +9,7 @@ def get_invoice(invoice_number): # fungsi untuk ambil dan mengirim data invoice
   """
   # Cek apakah invoice ada sebelum ambil datanya
   if not frappe.db.exists("Invoice", invoice_number):
-    frappe.thorow(_(f"Invoice {invoice_number} tidak ditemukan"), frappe.DoesNotExistError) # mengembalikan pesan jika invoice tidak ada
+    frappe.throw(_(f"Invoice {invoice_number} tidak ditemukan"), frappe.DoesNotExistError) # mengembalikan pesan jika invoice tidak ada
 
   invoice = frappe.get_doc("Invoice", invoice_number) # mengambil data invoice
   
@@ -47,10 +47,10 @@ def mark_as_paid(invoice_number, payment_amount): # fungsi untuk memcatat dan me
     frappe.throw(_("Jumlah pembayaran harus lebih dari 0"))
     
   # cek invoice apakah ada di database
-  if not frappe.db.exists("invoice", invoice_number):
+  if not frappe.db.exists("Invoice", invoice_number):
     frappe.throw(_(f"Invoice {invoice_number} tidak ditemukan"), frappe.DoesNotExistError)
 
-  invoice = frappe.get_doc("invoice", invoice_number) # ambil data invoice
+  invoice = frappe.get_doc("Invoice", invoice_number) # ambil data invoice
   
   # Validasi invoice belum lunas
   if invoice.payment_status == "Paid":

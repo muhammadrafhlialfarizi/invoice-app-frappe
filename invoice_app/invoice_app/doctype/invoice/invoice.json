@@ -1,0 +1,157 @@
+{
+ "_liked_by": "[\"rafhlialfarizi@gmail.com\"]",
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-06-12 15:51:07.358672",
+ "custom": 1,
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "customer_section",
+  "customer",
+  "tanggal_terbit_section",
+  "invoice_date",
+  "tabel_item_section",
+  "items",
+  "total_harga_item_section",
+  "total_amount",
+  "persentase_pajak_section",
+  "tax_percentage",
+  "grand_total_section",
+  "grand_total",
+  "outstanding_amount_section",
+  "outstanding_amount",
+  "payment_amount_section",
+  "payment_amount",
+  "payment_status_section",
+  "payment_status"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer_section",
+   "fieldtype": "Section Break",
+   "label": "Customer"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "tanggal_terbit_section",
+   "fieldtype": "Section Break",
+   "label": "Tanggal Terbit"
+  },
+  {
+   "fieldname": "invoice_date",
+   "fieldtype": "Date",
+   "label": "invoice_date"
+  },
+  {
+   "fieldname": "tabel_item_section",
+   "fieldtype": "Section Break",
+   "label": "Tabel Item"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "items",
+   "options": "Invoice Item"
+  },
+  {
+   "fieldname": "total_harga_item_section",
+   "fieldtype": "Section Break",
+   "label": "Total Harga Item"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "total_amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "persentase_pajak_section",
+   "fieldtype": "Section Break",
+   "label": "Persentase Pajak"
+  },
+  {
+   "fieldname": "tax_percentage",
+   "fieldtype": "Percent",
+   "label": "tax_percentage"
+  },
+  {
+   "fieldname": "grand_total_section",
+   "fieldtype": "Section Break",
+   "label": "Grand Total"
+  },
+  {
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "label": "grand_total",
+   "read_only": 1
+  },
+  {
+   "fieldname": "outstanding_amount_section",
+   "fieldtype": "Section Break",
+   "label": "Outstanding Amount"
+  },
+  {
+   "fieldname": "outstanding_amount",
+   "fieldtype": "Currency",
+   "label": "outstanding_amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "payment_amount_section",
+   "fieldtype": "Section Break",
+   "label": "Payment Amount"
+  },
+  {
+   "fieldname": "payment_amount",
+   "fieldtype": "Currency",
+   "label": "payment_amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "payment_status_section",
+   "fieldtype": "Section Break",
+   "label": "Payment Status"
+  },
+  {
+   "fieldname": "payment_status",
+   "fieldtype": "Select",
+   "label": "payment_status",
+   "options": "Unpaid\nPartially Paid\nPaid",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-06-13 20:25:23.004610",
+ "modified_by": "rafhlialfarizi@gmail.com",
+ "module": "Invoice App",
+ "name": "Invoice",
+ "naming_rule": "By script",
+ "owner": "rafhlialfarizi@gmail.com",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

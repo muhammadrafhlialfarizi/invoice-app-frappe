@@ -31,7 +31,7 @@ class Invoice(Document):
   def calculate_item_totals(self):
     """Hitung amount tiap item dan total keseluruhan"""
     total = 0 # Variabel akumulator
-    for item in self.item:
+    for item in self.items:
       item.amount = item.qty * item.rate # hitung banyak barang denga harganya
       total += item.amount # menggabungkan hasil hitung
     self.total_amount = total
@@ -47,7 +47,7 @@ class Invoice(Document):
   
   def update_payment_status(self):
     if self.outstanding_amount <= 0: # Kondisi 1: Lunas
-      self.payment_status = "paid"
+      self.payment_status = "Paid"
     elif self.outstanding_amount < self.grand_total: # Kondisi 2: Bayar sebagian
       self.payment_status = "Partially Paid"
     else: # Kondisi 3: Belum bayar sama sekali
