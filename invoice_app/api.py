@@ -40,3 +40,45 @@ def mark_as_paid(invoice_number, payment_amount): # fungsi untuk memcatat dan me
     POST /api/method/invoice_app.api.mark_as_paid
     Body: { "invoice_number": "...", "payment_amount": 100000 }
   """
+  payment_amount = float(payment_amount) # mengubah tyoe input jadi float
+  
+  # validasi input
+  if payment_amount <= 0:
+    frappe.throw(_("Jumlah pembayaran harus lebih dari 0"))
+    
+  # cek invoice apakah ada di database
+  if not frappe.db.exists("invoice", invoice_number):
+    frappe.throw(_(f"Invoice {invoice_number} tidak ditemukan"), frappe.DoesNotExistError)
+
+  invoice = frappe.get_doc("invoice", invoice_number) # ambil data invoice
+  
+  # Validasi invoice belum lunas
+  if invoice.payment_status == "Paid":
+    frappe.throw(_("Invoice ini sudah lunas"))
+  
+  # validasi pembayaran tidak melebihi sisa pembayaran
+  if payment_amount > invoice.outstanding_amount:
+    frappe.throw(_(f"Jumlah pembayaran melebihi outstanding amount ({invoice.outstanding_amount})"))
+    
+  # proses pembayran
+  invoice.payment_amount = (invoice.payment_amount or 0) + payment_amount
+  invoice.outstanding_amount = invoice.grand_total - invoice.payment_amount
+  
+  # update status pembayaran
+  if invoice.outstanding_amount <= 0:
+      invoice.payment_status = "Paid" # sudah lunas
+  else:
+      invoice.payment_status = "Partially Paid" # masih ada sisa pembayaran
+      
+  # simpan hasil db
+  invoice.save(ignore_permissions=True)
+  frappe.db.commit()
+  
+  # respon output ke clien/customer
+  return {
+    "message": "Pembayaran berhasil dicatat",
+    "invoice_number": invoice.name,
+    "payment_amount": payment_amount,
+    "outstanding_amount": invoice.outstanding_amount,
+    "payment_status": invoice.payment_status
+  }
