@@ -1,3 +1,41 @@
+# Invoice App
+Custom invoice management app berbasis Framework Frappe.
+---
+
+## Cara Setup
+
+### Prasyarat
+- Python 3.11+
+- Node.js 18+
+- MariaDB
+- Redis
+- Frappe Bench
+
+### Langkah Instalasi
+
+**1. Clone repository ini ke dalam folder apps:**
+```bash
+cd ~/frappe-bench
+bench get-app https://github.com/muhammadrafhlialfarizi/invoice-app-frappe.git
+```
+
+**2. Install app ke site:**
+```bash
+bench --site test-mli.localhost install-app invoice_app
+```
+
+**3. Jalankan development server:**
+```bash
+bench start
+```
+
+**4. Akses di browser:**
+```
+http://localhost:8000
+```
+Login dengan username `Administrator` dan password yang sudah diset saat `bench new-site`.
+---
+
 ## Cara Test API (Postman)
 
 ### Persiapan
@@ -133,44 +171,54 @@ Response yang diharapkan: pesan error bahwa pembayaran melebihi outstanding amou
 ![Overpayment](invoice_app/docs/screenshots/overpayment.png)
 ---
 
-### Invoice App
+## Design Decision
 
-Custom invoice management app
+### 1. Business Logic di Server-Side (Python)
+Semua kalkulasi (total item, pajak, grand total, outstanding amount, payment status) dikerjakan di Python melalui method `before_save()` pada class `Invoice`. Tidak ada logika bisnis yang ditempatkan di JavaScript/client-side. Ini memastikan data tetap konsisten dan tidak bisa dimanipulasi dari browser.
 
-### Installation
+### 2. Custom Naming Invoice
+Penamaan invoice menggunakan method `autoname()` yang mengambil inisial nama customer secara dinamis dari database, kemudian dikombinasikan dengan format `YYMM` dan nomor urut. Contoh: customer "Muat Logistik Indonesia" → `INV/MLI/2606/00001`.
 
-You can install this app using the [bench](https://github.com/frappe/bench) CLI:
+### 3. API dengan `frappe.whitelist()`
+Semua endpoint API didekorasi dengan `@frappe.whitelist()` agar hanya bisa diakses oleh user yang sudah terautentikasi. Ini mencegah akses publik tanpa login.
+
+### 4. Modularitas Kode
+Logika bisnis dipisahkan ke dalam beberapa file:
+- `invoice.py` → kalkulasi dan lifecycle hooks Doctype
+- `api.py` → endpoint API yang bersih dan hanya bertugas menerima request & mengembalikan response
+- `hooks.py` → pendaftaran event Frappe
+
+### 5. Validasi di Layer API
+Setiap endpoint API memvalidasi input sebelum memproses data: cek invoice ada atau tidak, jumlah pembayaran valid, dan invoice belum lunas. Error dikembalikan dengan pesan yang jelas menggunakan `frappe.throw()`.
+---
+
+## Struktur Proyek
+
+```
+invoice_app/
+├── invoice_app/
+│   ├── api.py                  # Endpoint API (get_invoice, mark_as_paid)
+│   ├── hooks.py                # Konfigurasi event Frappe
+│   ├── docs/
+│   │   └── screenshots/        # Screenshot hasil testing API
+│   └── doctype/
+│       └── invoice/
+│           ├── invoice.py      # Business logic Invoice
+│           └── invoice.json    # Definisi Doctype
+└── README.md
+```
+---
+
+## Installation (via bench)
 
 ```bash
-cd $PATH_TO_YOUR_BENCH
-bench get-app $URL_OF_THIS_REPO --branch develop
-bench install-app invoice_app
+cd ~/frappe-bench
+bench get-app https://github.com/muhammadrafhlialfarizi/invoice-app-frappe.git
+bench --site test-mli.localhost install-app invoice_app
+bench start
 ```
-
-### Contributing
-
-This app uses `pre-commit` for code formatting and linting. Please [install pre-commit](https://pre-commit.com/#installation) and enable it for this repository:
-
-```bash
-cd apps/invoice_app
-pre-commit install
-```
-
-Pre-commit is configured to use the following tools for checking and formatting your code:
-
-- ruff
-- eslint
-- prettier
-- pyupgrade
-
-### CI
-
-This app can use GitHub Actions for CI. The following workflows are configured:
-
-- CI: Installs this app and runs unit tests on every push to `develop` branch.
-- Linters: Runs [Frappe Semgrep Rules](https://github.com/frappe/semgrep-rules) and [pip-audit](https://pypi.org/project/pip-audit/) on every pull request.
-
+---
 
 ### License
 
-mit
+MIT
