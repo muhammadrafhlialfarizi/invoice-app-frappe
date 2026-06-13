@@ -2,7 +2,7 @@ import frappe
 from frappe import _
 
 @frappe.whitelist(allow_guest=False)
-def get_invoice(invoice_number):
+def get_invoice(invoice_number): # fungsi untuk ambil dan mengirim data invoice
   """
     Mendapatkan detail invoice berdasarkan nomor invoice.
     GET /api/method/invoice_app.api.get_invoice?invoice_number=INV/MLI/2601/00001
@@ -32,3 +32,11 @@ def get_invoice(invoice_number):
     "outstanding_amount": invoice.outstanding_amount,
     "payment_status": invoice.payment_status
   }
+
+@frappe.whitelist(allow_guest=False)
+def mark_as_paid(invoice_number, payment_amount): # fungsi untuk memcatat dan memperbaharui pembayaran
+  """
+    Mencatat pembayaran invoice.
+    POST /api/method/invoice_app.api.mark_as_paid
+    Body: { "invoice_number": "...", "payment_amount": 100000 }
+  """
