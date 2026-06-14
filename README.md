@@ -202,9 +202,17 @@ invoice_app/
 │   ├── docs/
 │   │   └── screenshots/        # Screenshot hasil testing API
 │   └── doctype/
-│       └── invoice/
-│           ├── invoice.py      # Business logic Invoice
-│           └── invoice.json    # Definisi Doctype
+│       ├── customer/
+│       │   ├── __init__.py
+│       │   ├── customer.json   # Definisi Doctype Customer
+│       │   └── customer.py     # Model Customer
+│       ├── invoice/
+│       │   ├── __init__.py
+│       │   ├── invoice.json    # Definisi Doctype Invoice
+│       │   └── invoice.py      # Business logic Invoice
+│       └── invoice_item/
+│           ├── __init__.py
+│           └── invoice_item.json  # Definisi Child Table Invoice Item
 └── README.md
 ```
 ---

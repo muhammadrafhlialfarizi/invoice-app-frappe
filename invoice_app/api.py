@@ -60,7 +60,7 @@ def mark_as_paid(invoice_number, payment_amount): # fungsi untuk memcatat dan me
   if payment_amount > invoice.outstanding_amount:
     frappe.throw(_(f"Jumlah pembayaran melebihi outstanding amount ({invoice.outstanding_amount})"))
     
-  # proses pembayran
+  # proses pembayaran
   invoice.payment_amount = (invoice.payment_amount or 0) + payment_amount
   invoice.outstanding_amount = invoice.grand_total - invoice.payment_amount
   
