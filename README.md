@@ -220,19 +220,20 @@ Setiap endpoint API memvalidasi input sebelum memproses data: cek invoice ada at
 ```
 invoice_app/
 ├── invoice_app/
-│   ├── api.py                  # Endpoint API (get_invoice, mark_as_paid)
-│   ├── hooks.py                # Konfigurasi event Frappe
+│   ├── api.py                     # Endpoint API (get_invoice, mark_as_paid)
+│   ├── hooks.py                   # Konfigurasi event Frappe
 │   ├── docs/
-│   │   └── screenshots/        # Screenshot hasil testing API
+│   │   ├── format_cetak/          # Screenshot dan PDF tampilan cetak
+│   │   └── postman/               # Screenshot hasil testing API
 │   └── doctype/
 │       ├── customer/
 │       │   ├── __init__.py
-│       │   ├── customer.json   # Definisi Doctype Customer
-│       │   └── customer.py     # Model Customer
+│       │   ├── customer.json      # Definisi Doctype Customer
+│       │   └── customer.py        # Model Customer
 │       ├── invoice/
 │       │   ├── __init__.py
-│       │   ├── invoice.json    # Definisi Doctype Invoice
-│       │   └── invoice.py      # Business logic Invoice
+│       │   ├── invoice.json       # Definisi Doctype Invoice
+│       │   └── invoice.py         # Business logic Invoice
 │       └── invoice_item/
 │           ├── __init__.py
 │           └── invoice_item.json  # Definisi Child Table Invoice Item
