@@ -1,0 +1,93 @@
+{
+ "_liked_by": "[\"rafhlialfarizi@gmail.com\"]",
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "C-.#####",
+ "creation": "2026-06-12 14:49:55.502498",
+ "custom": 1,
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "nama_customer_section",
+  "customer_name",
+  "email_section",
+  "email",
+  "nomor_telepon_section",
+  "phone",
+  "alamat_section",
+  "address"
+ ],
+ "fields": [
+  {
+   "fieldname": "nama_customer_section",
+   "fieldtype": "Section Break",
+   "label": "Nama Customer"
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "customer_name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "email_section",
+   "fieldtype": "Section Break",
+   "label": "Email"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "email"
+  },
+  {
+   "fieldname": "nomor_telepon_section",
+   "fieldtype": "Section Break",
+   "label": "Nomor Telepon"
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "phone"
+  },
+  {
+   "fieldname": "alamat_section",
+   "fieldtype": "Section Break",
+   "label": "Alamat"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Text",
+   "label": "address"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-06-14 07:12:18.698549",
+ "modified_by": "rafhlialfarizi@gmail.com",
+ "module": "Invoice App",
+ "name": "Customer",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "rafhlialfarizi@gmail.com",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
