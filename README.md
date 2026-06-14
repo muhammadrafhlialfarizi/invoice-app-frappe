@@ -171,6 +171,26 @@ Response yang diharapkan: pesan error bahwa pembayaran melebihi outstanding amou
 ![Overpayment](invoice_app/docs/screenshots/overpayment.png)
 ---
 
+## Print Format
+
+Invoice App menyediakan format cetak custom untuk dokumen invoice.
+
+### Cara Mencetak Invoice
+1. Buka invoice yang ingin dicetak
+2. Klik tombol **Print** di pojok kanan atas
+3. Pilih format **"Invoice Print"** di dropdown Format
+4. Klik **Print** atau **Download PDF**
+
+### Tampilan Format Cetak
+Format cetak menampilkan informasi lengkap invoice meliputi:
+- Nomor invoice dan tanggal terbit
+- Kode customer
+- Tabel item (nama item, kuantitas, rate, dan harga per item)
+- Ringkasan total harga item, persentase pajak, dan grand total
+
+[Lihat contoh PDF invoice](invoice_app/docs/INV_MRA_2606_0008.pdf)
+---
+
 ## Design Decision
 
 ### 1. Business Logic di Server-Side (Python)
