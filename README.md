@@ -63,7 +63,7 @@ Response yang diharapkan:
     "full_name": "Administrator"
 }
 ```
-![Login](invoice_app/docs/screenshots/login.png)
+![Login](invoice_app/docs/postman/login.png)
 ---
 
 ### 2. GET Invoice
@@ -95,7 +95,7 @@ Response yang diharapkan:
   }
 }
 ```
-![Get Invoice](invoice_app/docs/screenshots/get_invoice.png)
+![Get Invoice](invoice_app/docs/postman/get_invoice.png)
 ---
 
 ### 3. POST Pembayaran
@@ -126,7 +126,7 @@ Response yang diharapkan:
   }
 }
 ```
-![Partial Payment](invoice_app/docs/screenshots/partial_payment.png)
+![Partial Payment](invoice_app/docs/postman/partial_payment.png)
 ---
 
 ### 4. POST Pembayaran Lunas (Paid)
@@ -140,7 +140,7 @@ Body (JSON):
 }
 ```
 Response yang diharapkan: `payment_status` berubah menjadi `"Paid"`
-![Full Payment](invoice_app/docs/screenshots/full_payment.png)
+![Full Payment](invoice_app/docs/postman/full_payment.png)
 ---
 
 ### 5. Error: Invoice Tidak Ditemukan
@@ -154,7 +154,7 @@ Body (JSON):
 }
 ```
 Response yang diharapkan: pesan error bahwa invoice tidak ditemukan.
-![Error Invoice](invoice_app/docs/screenshots/error_invoice_random.png)
+![Error Invoice](invoice_app/docs/postman/error_invoice_random.png)
 ---
 
 ### 6. Error: Pembayaran Melebihi Outstanding
@@ -168,7 +168,7 @@ Body (JSON):
 }
 ```
 Response yang diharapkan: pesan error bahwa pembayaran melebihi outstanding amount.
-![Overpayment](invoice_app/docs/screenshots/overpayment.png)
+![Overpayment](invoice_app/docs/postman/overpayment.png)
 ---
 
 ## Print Format
@@ -183,12 +183,15 @@ Invoice App menyediakan format cetak custom untuk dokumen invoice.
 
 ### Tampilan Format Cetak
 Format cetak menampilkan informasi lengkap invoice meliputi:
+- Nama Perusahan
 - Nomor invoice dan tanggal terbit
-- Kode customer
-- Tabel item (nama item, kuantitas, rate, dan harga per item)
+- Nama customer
+- Tabel item (nama item, kuantitas, rate, dan total harga per item)
 - Ringkasan total harga item, persentase pajak, dan grand total
+- Ringkasan payment amount, outstanding amount, dan payment status
 
-[Lihat contoh PDF invoice](invoice_app/docs/INV_MRA_2606_0008.pdf)
+![Format Cetak](invoice_app/docs/format_cetak/format_cetak.png)
+[Lihat contoh PDF invoice](invoice_app/docs/format_cetak/INV_MRA_2606_0008.pdf)
 ---
 
 ## Design Decision
