@@ -18,7 +18,7 @@ class Invoice(Document):
     self.name = frappe.model.naming.make_autoname(prefix + ".####") # melengkapi prefik dengan no urut
   
   def get_initials(self, name):
-    """Ambil huruf pertama setiap kata, contoh: Muat Logistik Indonesia → MLI"""
+    """Ambil huruf pertama setiap kata, contoh: Rafhli Store → RS"""
     words = name.strip().split() # merapihkan dan memisakan string per kata 
     return "".join(word[0].upper() for word in words if word) # mengambil, mengabungakn, mengkapitalkan setiap hurup pertama pada setiap kata
   

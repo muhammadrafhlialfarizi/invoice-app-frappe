@@ -200,7 +200,7 @@ Format cetak menampilkan informasi lengkap invoice meliputi:
 Semua kalkulasi (total item, pajak, grand total, outstanding amount, payment status) dikerjakan di Python melalui method `before_save()` pada class `Invoice`. Tidak ada logika bisnis yang ditempatkan di JavaScript/client-side. Ini memastikan data tetap konsisten dan tidak bisa dimanipulasi dari browser.
 
 ### 2. Custom Naming Invoice
-Penamaan invoice menggunakan method `autoname()` yang mengambil inisial nama customer secara dinamis dari database, kemudian dikombinasikan dengan format `YYMM` dan nomor urut. Contoh: customer "Muat Logistik Indonesia" → `INV/MLI/2606/00001`.
+Penamaan invoice menggunakan method `autoname()` yang mengambil inisial nama customer secara dinamis dari database, kemudian dikombinasikan dengan format `YYMM` dan nomor urut. Contoh: customer "Rafhli Store" → `INV/RS/2606/00001`.
 
 ### 3. API dengan `frappe.whitelist()`
 Semua endpoint API didekorasi dengan `@frappe.whitelist()` agar hanya bisa diakses oleh user yang sudah terautentikasi. Ini mencegah akses publik tanpa login.
